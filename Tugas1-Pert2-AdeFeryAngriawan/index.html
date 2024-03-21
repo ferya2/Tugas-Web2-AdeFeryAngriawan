@@ -17,6 +17,8 @@
         }
 
         .todo-item {
+            position: relative;
+            /* Untuk pengaturan tombol delete */
             margin-bottom: 10px;
             padding: 10px;
             background-color: #f8f9fa;
@@ -32,6 +34,16 @@
 
         .todo-description {
             color: #6c757d;
+        }
+
+        .delete-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: red;
         }
     </style>
 </head>
@@ -92,9 +104,10 @@
             let li = document.createElement("li");
             li.className = "todo-item"; // Menambahkan kelas untuk gaya CSS
             li.innerHTML = `
-        <h3 class="todo-title">${getDataArray[0]}</h3>
-        <p class="todo-description">${getDataArray[1]}</p>
-    `;
+                <h3 class="todo-title">${getDataArray[0]}</h3>
+                <p class="todo-description">${getDataArray[1]}</p>
+                <button class="delete-btn">&times;</button> <!-- Tombol delete -->
+            `;
 
             // Menambahkan elemen <li> ke dalam elemen <ul> yang memiliki id="getData"
             getData.appendChild(li);
@@ -102,6 +115,11 @@
             // Mengosongkan nilai input setelah data ditambahkan
             title.value = "";
             description.value = "";
+
+            // Menambahkan event listener untuk tombol delete
+            li.querySelector('.delete-btn').addEventListener('click', () => {
+                getData.removeChild(li); // Menghapus todo dari daftar
+            });
         })
     </script>
 </body>
